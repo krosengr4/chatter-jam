@@ -9,8 +9,8 @@ public class UserInterface {
 							_________________MAIN MENU_________________
 				
 						---OPTIONS---
-				1 - View All Stories
-				2 - Create a New Story
+				1 - View All Posts
+				2 - Create a New Post
 				3 - Admin
 				0 - Exit
 				""");
