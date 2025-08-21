@@ -10,6 +10,8 @@ public interface CommentDao {
 
 	List<Comment> getAllFromPost(int postId);
 
+	Comment getById(int commentId);
+
 	Comment add(Comment comment);
 
 	void delete(int commentId);

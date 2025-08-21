@@ -1,9 +1,7 @@
 package data.mysql;
 
-import config.DatabaseConfiguration;
 import data.PostDao;
 import models.Post;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -12,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlPostDao extends MySqlBaseDao implements PostDao {
-
-	static BasicDataSource dataSource = DatabaseConfiguration.setDataSource();
 
 	public MySqlPostDao(DataSource dataSource) {
 		super(dataSource);
@@ -133,7 +129,7 @@ public class MySqlPostDao extends MySqlBaseDao implements PostDao {
 			statement.setInt(1, postId);
 
 			int rows = statement.executeUpdate();
-			if (rows > 0)
+			if(rows > 0)
 				System.out.println("Success! The post was deleted!!!");
 			else
 				System.err.println("ERROR! Could not delete the post!!!");
