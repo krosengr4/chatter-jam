@@ -6,10 +6,7 @@ import models.Post;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +81,39 @@ public class MySqlPostDao extends MySqlBaseDao implements PostDao {
 				System.err.println("ERROR! No posts found with that ID!!!");
 			}
 
+
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public Post create(Post post) {
+		String query = """
+				INSERT INTO posts (title, content, author, date_posted)
+				VALUES (?, ?, ?, ?);
+				""";
+		try(Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, post.getTitle());
+			statement.setString(2, post.getContent());
+			statement.setString(3, post.getAuthor());
+			statement.setDate(4, Date.valueOf(post.getDatePosted()));
+
+			int rows = statement.executeUpdate();
+			if(rows > 0) {
+				System.out.println("Success! Your post was created!!!");
+				ResultSet key = statement.getGeneratedKeys();
+
+				if(key.next()) {
+					int postId = key.getInt(1);
+					return getById(postId);
+				}
+			} else {
+				System.err.println("ERROR! Could not create the post!!!");
+			}
 
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
