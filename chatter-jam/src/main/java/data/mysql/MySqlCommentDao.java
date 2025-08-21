@@ -16,6 +16,36 @@ public class MySqlCommentDao extends MySqlBaseDao implements CommentDao {
 		super(dataSource);
 	}
 
+	@Override
+	public List<Comment> getAll() {
+		List<Comment> comments = new ArrayList<>();
+
+
+		return comments;
+	}
+
+	@Override
+	public List<Comment> getAllFromPost(int postId) {
+		List<Comment> comments = new ArrayList<>();
+
+
+		return comments;
+	}
+
+	@Override
+	public Comment getById(int commentId) {
+		return null;
+	}
+
+	@Override
+	public Comment add(Comment comment) {
+		return null;
+	}
+
+	@Override
+	public void delete(int commentId) {
+
+	}
 
 	private Comment mapRow(ResultSet result) throws SQLException {
 		int commentId = result.getInt("comment_id");
@@ -26,5 +56,4 @@ public class MySqlCommentDao extends MySqlBaseDao implements CommentDao {
 
 		return new Comment(commentId, postId, content, author, datePosted);
 	}
-
 }
