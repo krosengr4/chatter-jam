@@ -4,6 +4,8 @@ import data.CommentDao;
 import models.Comment;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,8 +21,18 @@ public class MySqlCommentDao extends MySqlBaseDao implements CommentDao {
 	@Override
 	public List<Comment> getAll() {
 		List<Comment> comments = new ArrayList<>();
+		String query = "SELECT * FROM comments";
 
+		try(Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query);
 
+			ResultSet results = statement.executeQuery();
+			while(results.next()) {
+				comments.add(mapRow(results));
+			}
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 		return comments;
 	}
 
