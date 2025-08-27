@@ -20,7 +20,7 @@ public class UserInterface {
 	public int displayPostScreen() {
 		System.out.println("""
 					_________________POSTS SCREEN_________________
-				
+		
 				---OPTIONS---
 		1 - See all posts
 		2 - See all posts from a user
@@ -30,4 +30,16 @@ public class UserInterface {
 		return Utils.getUserInputIntMinMax("Enter here:\n", 0, 3);
 	}
 
+	public int displaySinglePost() {
+		System.out.println("""
+		_____________________________________________________________
+				---OPTIONS---
+		1 - See comments
+		2 - Like
+		3 - Dislike
+		0 - Go back
+		""");
+
+		return Utils.getUserInputIntMinMax("Enter here:\n", 0, 3);
+	}
 }
