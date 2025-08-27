@@ -64,9 +64,9 @@ public class Post {
 	public void printData() {
 		System.out.printf("""
 							-----POST ID: %d-----
-								By: %s
+							By: %s
 				
-								Title: %s
+							Title: %s
 						------------------------------
 				%s
 				----------------------------------------–----------------
