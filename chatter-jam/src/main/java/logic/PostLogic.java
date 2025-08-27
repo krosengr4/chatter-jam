@@ -30,7 +30,6 @@ public class PostLogic {
 	}
 
 	private static void showAll() {
-		System.out.println("All posts");
 		List<Post> postList = postDao.getAll();
 
 		if(postList.isEmpty()) {

@@ -63,15 +63,16 @@ public class Post {
 	//todo: Create method for posts to be printed
 	public void printData() {
 		System.out.printf("""
-							-----POST ID: %d-----
-							By: %s
+										-----POST ID: %d-----
+										  By: %s
+									   ------------------------
 				
-							Title: %s
-						------------------------------
+										  Title: %s
+							--------------------------------------------------------
 				%s
-				----------------------------------------–----------------
+		
 				""", this.postId, this.author, this.title, this.content);
 		System.out.println("Date Posted: " + this.datePosted);
-		System.out.println("-------------------------------------------------");
+		System.out.println("\n\n");
 	}
 }
