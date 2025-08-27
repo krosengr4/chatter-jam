@@ -1,10 +1,18 @@
 package logic;
 
+import config.DatabaseConfiguration;
+import data.PostDao;
+import data.mysql.MySqlPostDao;
+import models.Post;
 import ui.UserInterface;
+import utils.Utils;
+
+import java.util.List;
 
 public class PostLogic {
 
 	static UserInterface ui = new UserInterface();
+	static PostDao postDao = new MySqlPostDao(DatabaseConfiguration.setDataSource());
 
 	public static void processPostScreen() {
 		boolean ifContinue = true;
@@ -23,13 +31,24 @@ public class PostLogic {
 
 	private static void showAll() {
 		System.out.println("All posts");
+		List<Post> postList = postDao.getAll();
+
+		if(postList.isEmpty()) {
+			System.out.println("There are no posts to be displayed at this time...");
+		} else {
+			for(Post post : postList) {
+				post.printData();
+			}
+		}
+
+		Utils.pauseApp();
 	}
 
 	private static void showAllFromUser() {
 		System.out.println("All from a certain user");
 	}
 
-	public static void showOne() {
+	private static void showOne() {
 		System.out.println("Show one post");
 	}
 

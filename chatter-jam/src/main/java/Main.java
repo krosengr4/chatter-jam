@@ -1,3 +1,5 @@
+import logic.MainLogic;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -10,6 +12,9 @@ public class Main {
 				____________________________________________________________________________
 				
 				""");
+
+		MainLogic.processHomeScreen();
+		System.out.println("Goodbye!");
 	}
 
 }
