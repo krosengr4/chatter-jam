@@ -2,12 +2,10 @@ package data.mysql;
 
 import data.CommentDao;
 import models.Comment;
+import models.Post;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +82,32 @@ public class MySqlCommentDao extends MySqlBaseDao implements CommentDao {
 
 	@Override
 	public Comment add(Comment comment) {
+		String query = """
+				INSERT INTO comments (post_id, content, author, date_posted)
+				VALUES (?, ?, ?, ?);
+				""";
+
+		try(Connection connection = getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, comment.getPostId());
+			statement.setString(2, comment.getContent());
+			statement.setString(3, comment.getAuthor());
+			statement.setDate(4, Date.valueOf(comment.getDatePosted()));
+
+			int rows = statement.executeUpdate();
+			if(rows > 0) {
+				ResultSet key = statement.getGeneratedKeys();
+				if(key.next()) {
+					int commentId = key.getInt(1);
+					return getById(commentId);
+				}
+			} else {
+				System.err.println("ERROR! Failed to post the comment!!!");
+			}
+
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
 		return null;
 	}
 
