@@ -25,6 +25,7 @@ public class UserInterface {
 		1 - See all posts
 		2 - See all posts from a user
 		3 - See post by id (here you can leave a comment)
+		0 - Go back
 		""");
 
 		return Utils.getUserInputIntMinMax("Enter here:\n", 0, 3);
