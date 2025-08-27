@@ -18,6 +18,8 @@ title varchar(255) NOT NULL,
 content TEXT NOT NULL,
 author varchar(75), 
 date_posted DATETIME NOT NULL,
+likes INT,
+dislikes INT,
 PRIMARY KEY (post_id)
 );
 
